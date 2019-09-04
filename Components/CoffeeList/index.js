@@ -6,6 +6,7 @@ import { List, Content } from "native-base";
 
 // Store
 import coffeeStore from "../../store/coffeeStore";
+import CartButton from "../Buttons/CartButton";
 
 // Component
 import CoffeeItem from "./CoffeeItem";
@@ -21,6 +22,11 @@ const CoffeeList = () => {
       <List>{shops}</List>
     </Content>
   );
+};
+CoffeeList.navigationOptions = {
+  title: "Coffee List",
+  headerLeft: null,
+  headerRight: <CartButton />
 };
 
 export default observer(CoffeeList);

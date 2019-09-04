@@ -20,12 +20,15 @@ import styles from "./styles";
 
 // Store
 import coffeeStore from "../../store/coffeeStore";
+import cartStore from "../../store/cartStore";
 
 class CoffeeDetail extends Component {
   state = {
     drink: "Cappuccino",
-    option: "Small"
+    option: "Small",
+    quantity: 1
   };
+  const;
 
   changeDrink = value => {
     this.setState({
@@ -41,8 +44,12 @@ class CoffeeDetail extends Component {
 
   render() {
     const { cafes } = coffeeStore;
+
     if (!cafes) return <Content />;
-    const cafe = cafes[0];
+    const cafe = cafes.find(
+      cafe => this.props.navigation.getParam("cafeID") === cafe.id
+    );
+
     return (
       <Content>
         <List>
@@ -86,7 +93,11 @@ class CoffeeDetail extends Component {
               </Picker>
             </Body>
           </ListItem>
-          <Button full danger>
+          <Button
+            full
+            danger
+            onPress={() => cartStore.addItemToCart(this.state)}
+          >
             <Text>Add</Text>
           </Button>
         </List>
